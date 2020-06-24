@@ -10,9 +10,39 @@
     var socket = io();
     $('form').submit(function(e) {
       e.preventDefault(); // prevents page reloading
-      socket.emit('chat message', $('#m').val());
+      socket.emit('msg', {txt: $('#m').val()} );
+      console.log('sending message')
       $('#m').val('');
       return false;
     });
+
+    socket.on('connect', () => {
+      socket.emit('cmd', { op: 'setScreenSize', txt: 'set screen size', val: { width: 80, height: 20} });
+    });
+
+    socket.on('msg', function(msg){
+      console.log('inbound message: ' + JSON.stringify(msg));
+      if(msg.op) {
+        switch(msg.op){
+          case 'clear': {
+            $('#messages').empty();
+            break;
+          }
+          case 'text': {}
+          default: {
+            console.log(`printing out: ${msg.txt} \n #messages li:eq(${msg.y})`);
+            let row = $(`#messages li:eq(${msg.y})`);
+            console.log(row);
+
+            if(row.length>0) {
+              row.text(msg.txt);
+            } else {
+              $('#messages').append($('<li>').text(msg.txt));
+            }
+          }
+        }
+      }
+    });
+
   });
 </script>

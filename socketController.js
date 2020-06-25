@@ -57,7 +57,7 @@ class controller {
       this.currentLine = 0
       msgOut.op = 'clear'
       console.log(`currentLine reached ${this.currentLine}. clearing screen`)
-      this.sendMessage('msg', msgOut)
+      this.sendMessage(msgOut)
     }
 
     if (this.currentLine > this.iScreenHeight) {
@@ -66,7 +66,7 @@ class controller {
 
     ++this.currentLine
     msgOut.y = this.currentLine
-    this.sendMessage('msg', msgOut)
+    this.sendMessage(msgOut)
 
     console.log(this.currentLine)
   }

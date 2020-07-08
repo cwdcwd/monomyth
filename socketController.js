@@ -61,6 +61,7 @@ class controller {
 
       if (this.currentLine > this.iScreenHeight) {
         this.currentLine = -1
+        this.sendCommand({ txt: 'clear', op: 'clear', y: this.currentLine, x: 0 })
       }
 
       ++this.currentLine

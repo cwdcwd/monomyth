@@ -1,13 +1,18 @@
     <ul id="messages"></ul>
     <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
+      <input id="m" autocomplete="off" />
     </form>
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
   $(function () {
+    $('body').click(()=>{
+      $('#m').focus();
+    })
+
     var socket = io();
+    $('#m').focus();
     $('form').submit(function(e) {
       e.preventDefault(); // prevents page reloading
       const txt = $('#m').val()
